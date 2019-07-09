@@ -7,8 +7,10 @@ import os
 import socket
 import logging
 
-from urllib.request import getproxies
-from urllib.parse import urlparse, urlunparse
+# from urllib.request import getproxies
+from urllib import getproxies
+# from urllib.parse import urlparse, urlunparse
+from urlparse import urlparse, urlunparse
 from socket import inet_pton
 
 from config import config

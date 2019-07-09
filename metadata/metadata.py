@@ -17,7 +17,7 @@ from config import config
 def get_common(hostname):
     return {
         "apiKey": config.get("api_key"),
-        "uuid": uuid.uuid5(uuid.NAMESPACE_DNS, platform.node() + str(uuid.getnode())).hex,
+        "uuid": config.get("uuid", uuid.uuid5(uuid.NAMESPACE_DNS, platform.node() + str(uuid.getnode())).hex),
         "internalHostname": hostname,
     }
 

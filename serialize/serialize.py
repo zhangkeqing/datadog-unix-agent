@@ -4,10 +4,13 @@
 # Copyright 2018 Datadog, Inc.
 
 import json
+import uuid
+import platform
 from collections import defaultdict
 
 from utils.hostname import get_hostname
 from utils.unicode import ensure_unicode
+from config import config
 
 
 class Serializer(object):
@@ -99,6 +102,7 @@ class Serializer(object):
         events, e_count = self.serialize_events(add_meta)
 
         extra_headers = self.JSON_HEADERS
+        extra_headers['uuid'] = config.get("uuid", uuid.uuid5(uuid.NAMESPACE_DNS, platform.node() + str(uuid.getnode())).hex),
         if metrics:
             self._forwarder.submit_v1_series(
                 metrics, extra_headers)

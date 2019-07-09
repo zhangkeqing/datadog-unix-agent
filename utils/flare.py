@@ -8,7 +8,7 @@ import zipfile
 import logging
 import datetime
 import shutil
-import urllib.parse
+import urlparse
 import tempfile
 
 import requests
@@ -105,11 +105,11 @@ class Flare(object):
     def submit(self):
         endpoint = self.DATADOG_SUPPORT_URL
         if self._case_id:
-            endpoint = urllib.parse.urljoin(endpoint, str(self._case_id))
+            endpoint = urlparse.urljoin(endpoint, str(self._case_id))
 
         base_uri = get_site_url(config.get('dd_url'), site=config.get('site'))
-        endpoint = urllib.parse.urljoin(endpoint, "?api_key={}".format(config.get('api_key')))
-        url = urllib.parse.urljoin(base_uri, endpoint)
+        endpoint = urlparse.urljoin(endpoint, "?api_key={}".format(config.get('api_key')))
+        url = urlparse.urljoin(base_uri, endpoint)
 
         flare_path = self.get_archive_path()
         if not os.path.exists(flare_path):
